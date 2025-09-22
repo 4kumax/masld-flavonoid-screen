@@ -1,4 +1,4 @@
-﻿# Supporting Information for [Article Title]
+﻿# Supporting Information for MASLD Flavonoid Screen
 
 This archive contains datasets, configuration files, and scripts required to reproduce the results of the manuscript.
 
@@ -31,3 +31,9 @@ python Scripts/postprocess_hits.py --config Configs/config.yaml --predictions Da
 ## Contact
 
 Additional details are available from the corresponding author upon request.
+
+## Data Citation
+- Version: v1.0.0
+- DOI: TBD
+- Recommended citation:
+  - Supporting Information for MASLD Flavonoid Screen, v1.0.0 (2025). DOI: TBD.

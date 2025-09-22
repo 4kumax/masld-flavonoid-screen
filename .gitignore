@@ -28,3 +28,5 @@ Thumbs.db
 # Project-specific large files
 regdb/raw/Summary_Files.zip
 work_notebook.ipynb
+
+vis1.ipynb

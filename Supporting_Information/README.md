@@ -1,4 +1,4 @@
-﻿# Supporting Information for MASLD Flavonoid Screen
+﻿# Supporting Information for Machine Learning for the Discovery and Development of Multitarget Flavonoid-Based Functional Products in MASLD
 
 This archive contains datasets, configuration files, and scripts required to reproduce the results of the manuscript.
 
@@ -36,4 +36,5 @@ Additional details are available from the corresponding author upon request.
 - Version: v1.0.0
 - DOI: TBD
 - Recommended citation:
-  - Supporting Information for MASLD Flavonoid Screen, v1.0.0 (2025). DOI: TBD.
+  - Supporting Information for Machine Learning for the Discovery and Development of Multitarget Flavonoid-Based Functional Products in MASLD, v1.0.0 (2025). DOI: TBD.
+

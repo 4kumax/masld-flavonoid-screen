@@ -1,0 +1,88 @@
+io:
+  predictions: data/advanced_predictions.csv
+  oof_dir: data/oof
+  out_dir: data/postproc
+  reports_dir: reports
+
+# Веса таргетов для TA_weighted
+weights_path: data/weights.json
+
+# Пер-таргет пороги; если определены — TA считается по ним
+thresholds:
+  per_target:
+    CHEMBL239: 0.50
+    CHEMBL235: 0.50
+    CHEMBL3351: 0.50
+    CHEMBL5853: 0.50
+    CHEMBL4158: 0.50
+    CHEMBL3247: 0.50
+    CHEMBL2083: 0.50
+    CHEMBL2047: 0.50
+    CHEMBL1947: 0.50
+    CHEMBL5080: 0.50
+
+# Общие настройки TA
+ta:
+  base_thr: 0.50         # используется если thresholds.per_target не задан
+  agg: weighted          # weighted | bayes (главный скор для сортировки)
+
+# Веса таргетов (используются пайплайном для weighted_sum и постпроцессом для TA_weighted)
+weights: {}
+
+# Кластеризация/сходство
+cluster:
+  fp: morgan             # morgan | feature | maccs | rdk
+  radius: 2
+  n_bits: 2048
+  sim: tanimoto          # tanimoto | tversky
+  alpha: 0.5             # для Tversky
+  tan_thr: 0.3          # порог сходства для кластеров
+  auto_cut: true        # автоподбор порога (силуэт)
+  candidates: [0.10,0.12,0.15,0.18,0.20,0.25,0.30,0.35,0.40]
+  knn_k: 4
+
+moa_cluster:
+  enabled: true         # включить MOA-кластера
+  normalize: "l2"       # none|l1|l2 — нормализация p(target) по молекуле
+  sim: cosine           # пока только cosine
+  auto_cut: true
+  sim_thr: 0.30
+  candidates: [0.20,0.25,0.30,0.35,0.40,0.45]
+  knn_k: 5
+
+scaffold:
+  enabled: true         # Bemis–Murcko скелеты
+  collapse_sidechains: true
+
+portfolio:
+  size: 15
+
+# Агрегация количественных измерений (RSE)
+data_agg:
+  rse_thr: 0.15
+  per_struct_cluster: 1     # не больше 1 медоида на структурный кластер
+  per_moa_cluster: 1        # и не больше 1 на MOA-кластер
+  ta_min: 3
+  cover_windows: true       # гарантировать покрытие утро/вечер/постпрандиально
+
+# # Портфель
+# portfolio:
+#   size: 50               # общий лимит
+#   per_cluster: 3         # максимум медоидов на кластер
+
+# Окна и «ничьи»
+window_targets:
+  morning: [CHEMBL239, CHEMBL3351, CHEMBL2083]
+  evening: [CHEMBL2047, CHEMBL1947, CHEMBL235]
+  postpr: [CHEMBL5080]
+  # Дополнительные липидные ферменты отнесём к утреннему окну (при необходимости можно перераспределить)
+  # Включены в morning: ACC1 (CHEMBL3351), DGAT2 (CHEMBL5853), FASN (CHEMBL4158), HMGCR (CHEMBL3247), PPARA (CHEMBL239), FABP4 (CHEMBL2083)
+  # Если хотите иной мэппинг — поправьте списки выше
+chrono:
+  delta: 0.03            # если лидер < delta от второго, метка dual_*
+
+# Break-gap анализ
+break_gap:
+  gap_tan: 0.8           # порог сходства для анализируемых пар
+  gap_thr: 0.4           # порог максимальной разницы вероятностей Δp
+  scan: "tan=0.85,0.80,0.75;dp=0.50,0.40,0.30;topn=200"   # опционально: строка вида "tan=0.85,0.8;dp=0.5,0.4;topn=200"

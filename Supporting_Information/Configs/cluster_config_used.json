@@ -1,0 +1,10 @@
+{
+  "config_path": "C:\\Users\\User\\Desktop\\projects\\dis-nafld-v2\\config.yaml",
+  "fp": "morgan",
+  "n_bits": 2048,
+  "radius": 2,
+  "sim": "tanimoto",
+  "alpha": 0.5,
+  "thr": 0.2,
+  "auto_cut": true
+}

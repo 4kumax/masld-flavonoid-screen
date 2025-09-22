@@ -1,0 +1,2 @@
+mol_i,mol_j,tanimoto,max_delta_p,target_max_delta,sign
+3,4,0.8703703703703703,0.4930686121686719,CHEMBL5080,-1.0
